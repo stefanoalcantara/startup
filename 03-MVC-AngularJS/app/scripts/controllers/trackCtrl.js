@@ -8,11 +8,12 @@ angular.module('spotifyApp')
     console.log($scope.text);
 
     function getResult(){
- 		$http.get('https://api.spotify.com/v1/albums/' + $scope.text + '/tracks')
-			.then(function(response){
-				$scope.tracks = response.data.items;
-			},function(){});
+ 		var searchUrl = 'https://api.spotify.com/v1/albums/' + $scope.text + '/tracks';
+ 		searchService.getResults(searchUrl, $http).then(function successCallback(data){
+ 			$scope.tracks = data.items;
+ 		})
     }
+
     getResult();
-    console.log($scope.tracks);
+   console.log($scope.tracks);
   }]);
